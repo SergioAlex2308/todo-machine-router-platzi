@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTodos } from '../useTodos';
 import { TodoHeader } from '../../ui/TodoHeader';
 import { TodoCounter } from '../../ui/TodoCounter';
@@ -9,14 +9,15 @@ import { TodoItem } from '../../ui/TodoItem';
 import { TodosError } from '../../ui/TodosError';
 import { TodosLoading } from '../../ui/TodosLoading';
 import { EmptyTodos } from '../../ui/EmptyTodos';
-import { TodoForm } from '../../ui/TodoForm';
+//import { TodoForm } from '../../ui/TodoForm';
 import { CreateTodoButton } from '../../ui/CreateTodoButton';
-import { Modal } from '../../ui/Modal';
+//import { Modal } from '../../ui/Modal';
 import { ChangeAlert } from '../../ui/ChangeAlert';
 
 function HomePage() {
 	const navigate = useNavigate();
 	const { state, stateUpdaters } = useTodos();
+	let [searchParams, setSearchParams] = useSearchParams();
 
 	const {
 		error,
@@ -37,6 +38,10 @@ function HomePage() {
 		sincronizeTodos,
 	} = stateUpdaters;
 
+	// searchParams = searchValue;
+	// console.log(searchParams)
+	// setSearchParams(searchParams);
+
 	return (
 		<React.Fragment>
 			<TodoHeader loading={loading}>
@@ -47,6 +52,8 @@ function HomePage() {
 				<TodoSearch
 					searchValue={searchValue}
 					setSearchValue={setSearchValue}
+					searchParams={searchParams}
+					setSearchParams={setSearchParams}
 				/>
 			</TodoHeader>
 
